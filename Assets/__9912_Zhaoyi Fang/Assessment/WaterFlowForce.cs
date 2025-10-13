@@ -5,7 +5,7 @@ public class WaterFlowForce : MonoBehaviour
 {
     public enum Axis { Right, Up, Forward }
 
-    public Axis torqueAxis = Axis.Up;   // 你的轴是Y就用Up
+    public Axis torqueAxis = Axis.Up;   //
 
     public float torquePerSecond = 100f;
 
@@ -30,24 +30,20 @@ public class WaterFlowForce : MonoBehaviour
 
         if (rb == null) return;
 
-        // 轴向
         Vector3 local = torqueAxis == Axis.Right ? Vector3.right :
                         torqueAxis == Axis.Up    ? Vector3.up :
                                                    Vector3.forward;
         Vector3 worldAxis = rb.transform.TransformDirection(local.normalized);
 
-        // 当前角速度 (rad/s)
         float omega = Vector3.Dot(rb.angularVelocity, worldAxis);
         float maxOmega = maxSpeedDegPerSec * Mathf.Deg2Rad;
 
         if (Mathf.Abs(omega) < maxOmega)
         {
-            // 低于目标 → 加力
             rb.AddTorque(worldAxis * torquePerSecond * Time.deltaTime, ForceMode.Force);
         }
         else
         {
-            // 超过目标 → 施加轻微反向扭矩（刹车）
             rb.AddTorque(-Mathf.Sign(omega) * worldAxis * torquePerSecond * brakingRatio * Time.deltaTime, ForceMode.Force);
         }
     }
