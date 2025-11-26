@@ -19,4 +19,8 @@ public void SetSpeed(float newSpeed)
 {
     ySpeed = newSpeed;
 }
+public void Stop()
+{
+    ySpeed = 0;
+}
 }

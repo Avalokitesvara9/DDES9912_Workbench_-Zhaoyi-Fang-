@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SinYBob1 : MonoBehaviour
+public class SinYBob2 : MonoBehaviour
 {
     public Vector3 Startposition;
     public Vector3 sinOffset;

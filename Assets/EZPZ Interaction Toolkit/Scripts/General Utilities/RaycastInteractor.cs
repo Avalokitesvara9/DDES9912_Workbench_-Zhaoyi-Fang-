@@ -15,7 +15,7 @@ using TMPro;
 
 public class RaycastInteractor : MonoBehaviour
 {
-
+    
 
     [Header("Primary Settings")]
     public Transform rayPointer;
@@ -73,12 +73,12 @@ public class RaycastInteractor : MonoBehaviour
             environmentHitIndicatorRenderer = environmentHit.GetComponent<Renderer>();
         }
 
-        if (generalHit != null)
+        if(generalHit != null)
         {
             generalHitIndicatorRenderer = generalHit.GetComponent<Renderer>();
         }
 
-        if (tooFarIcon != null)
+        if(tooFarIcon != null)
         {
             tooFarIcon.SetActive(false);
         }
@@ -164,14 +164,14 @@ public class RaycastInteractor : MonoBehaviour
     {
         //Debug.Log("--FireLift");
 
-        if (subject != null)
+        if(subject != null)
         {
             subject.onPrimaryInteractLift.Invoke();
         }
 
-        if (moveSubject != null)
+        if(moveSubject != null)
         {
-            if (moveSubject.dropOnKeyLift)
+            if(moveSubject.dropOnKeyLift)
                 DropMovable();
         }
     }
@@ -196,7 +196,7 @@ public class RaycastInteractor : MonoBehaviour
 
     public void HandleSecondaryInteract()
     {
-        if (subject != null)
+        if(subject != null)
         {
             if (!subject.restrictSecondaryToHeldOnly)
             {
@@ -204,7 +204,7 @@ public class RaycastInteractor : MonoBehaviour
             }
             else
             {
-                if (moveSubject != null)
+                if(moveSubject != null)
                 {
                     if (moveSubject.isActiveAndEnabled)
                     {
@@ -286,7 +286,7 @@ public class RaycastInteractor : MonoBehaviour
         {
             Debug.DrawRay(rayPointer.position, rayPointer.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
 
-            if (generalHit != null)
+            if(generalHit != null)
             {
                 generalHit.gameObject.SetActive(true);
                 generalHit.position = hit.point;
@@ -314,8 +314,8 @@ public class RaycastInteractor : MonoBehaviour
     {
         hitSubject = hit.collider.gameObject.GetComponent<InteractableGeneral>();
 
-        if (hitSubject != null)
-        {
+        if(hitSubject != null)
+        {   
             if (hitSubject.customTouchDistance <= 0)
             {
                 if (hit.distance <= touchDistanceDefault)
@@ -329,7 +329,7 @@ public class RaycastInteractor : MonoBehaviour
                 }
             }
             else
-            {
+            {   
                 if (hit.distance <= hitSubject.customTouchDistance)
                 {
                     ActivateTooFarIcon(false);
@@ -355,13 +355,13 @@ public class RaycastInteractor : MonoBehaviour
 
             if (subject != prevHitSubject)
             {
-                subject.onHoverEnter.Invoke();
+                subject.onHoverEnter.Invoke();                
 
                 if (prevHitSubject != null)
                 {
                     prevHitSubject.onHoverExit.Invoke();
                 }
-
+                
             }
 
             if (interactState && !prevInteractState)
@@ -388,14 +388,14 @@ public class RaycastInteractor : MonoBehaviour
         {
             if (hoverTextDisplay != null)
             {
-                hoverTextDisplay.text = newText.Replace(useKeyTag, useKeyString);
+                hoverTextDisplay.text = newText.Replace(useKeyTag,useKeyString);
             }
         }
         else
         {
-            if (hoverTextRig != null)
+            if(hoverTextRig != null)            
                 hoverTextRig.SetActive(false);
-
+            
         }
     }
 
@@ -410,7 +410,7 @@ public class RaycastInteractor : MonoBehaviour
                     SyncHoverText(subject.hoverText);
                 else
                 {
-                    if (moveSubject.heldText.Length > 0)
+                    if(moveSubject.heldText.Length > 0)
                         SyncHoverText(subject.heldText);
                     else
                         SyncHoverText(subject.hoverText);
@@ -420,7 +420,7 @@ public class RaycastInteractor : MonoBehaviour
             {
                 hoverTextRig.SetActive(false);
             }
-
+            
         }
     }
 
@@ -430,14 +430,14 @@ public class RaycastInteractor : MonoBehaviour
         //Debug.Log("HandleUnityButton - before");
         Button b = hit.collider.gameObject.GetComponent<Button>();
 
-        if (b != null)
+        if(b != null)
         {
             if (interactState)
             {
                 b.onClick.Invoke();
             }
         }
-
+      
     }
 
     void HandleMovables(InteractableGeneral hitSubject)
@@ -684,7 +684,7 @@ public class RaycastInteractor : MonoBehaviour
 
     public void ActivateTooFarIcon(bool mode)
     {
-        if (tooFarIcon != null)
+        if(tooFarIcon != null)
         {
             tooFarIcon.SetActive(mode);
         }
